@@ -1,6 +1,6 @@
 import java.util.Scanner;
 import java.util.*;
-
+// Natasha 14.08.2018
 
 public class Paper {
     public static void main(String args[]) {
@@ -8,10 +8,10 @@ public class Paper {
         Scanner scan = new Scanner(System.in);
         int n=scan.nextInt();
         String playerMove = scan.nextLine();
-        String ComputerMove;
+        String computerMove;
         
         // Game: moves and rules definition
-        String[] gameMoves = ["paper","rock","scissors"];
+        String gameMoves[] = {"paper","rock","scissors"};
         Hashtable winnerRules = new Hashtable();
         winnerRules.put("paper","rock");
         winnerRules.put("rock","scissors");
@@ -21,19 +21,18 @@ public class Paper {
         
         for (int i = 0;i<n;i++)
         {
-            int m =random.nextInt(gameMoves.size());
-            System.out.println("-->>> Attempt number: "+m);
-            playerMove = scan.nextLine();
-            ComputerMove = "";//gameMoves.get("0");
+            int m =random.nextInt(gameMoves.length);
+            computerMove = gameMoves[m];
+            playerMove = scan.nextLine().trim();
             System.out.println("-->>> Attempt number: "+(i+1));
             System.out.println("Player's move is: "+playerMove);
-            System.out.println("Computer's move is: "+ComputerMove+"\n");
-            if (ComputerMove != playerMove)
+            System.out.println("Computer's move is: "+computerMove+"\n");
+            if (!Objects.equals(computerMove,playerMove))
             {
-                if (winnerRules.get(ComputerMove)== playerMove)
+                if (Objects.equals(winnerRules.get(computerMove),playerMove))
                 {
                     System.out.println("The winner is: Computer ");
-                }else if (winnerRules.get(playerMove)== ComputerMove)
+                }else if (Objects.equals(winnerRules.get(playerMove),computerMove))
                 {
                     System.out.println("The winner is: Player ");
                 }else
