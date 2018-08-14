@@ -1,27 +1,50 @@
 import java.util.Scanner;
+import java.util.*;
+
 
 public class Paper {
     public static void main(String args[]) {
+        
         Scanner scan = new Scanner(System.in);
         int n=scan.nextInt();
-        System.out.println("Game will finish within "+n+" number of moves.");
-        String move;
-        move = scan.nextLine();
+        String playerMove = scan.nextLine();
+        String ComputerMove;
+        
+        // Game: moves and rules definition
+        String[] gameMoves = ["paper","rock","scissors"];
+        Hashtable winnerRules = new Hashtable();
+        winnerRules.put("paper","rock");
+        winnerRules.put("rock","scissors");
+        winnerRules.put("scissors","paper");
+        //:game
+        Random random =new Random();
         
         for (int i = 0;i<n;i++)
         {
-            move = scan.nextLine();
-            System.out.println("Your move is: "+move);
-
+            int m =random.nextInt(gameMoves.size());
+            System.out.println("-->>> Attempt number: "+m);
+            playerMove = scan.nextLine();
+            ComputerMove = "";//gameMoves.get("0");
+            System.out.println("-->>> Attempt number: "+(i+1));
+            System.out.println("Player's move is: "+playerMove);
+            System.out.println("Computer's move is: "+ComputerMove+"\n");
+            if (ComputerMove != playerMove)
+            {
+                if (winnerRules.get(ComputerMove)== playerMove)
+                {
+                    System.out.println("The winner is: Computer ");
+                }else if (winnerRules.get(playerMove)== ComputerMove)
+                {
+                    System.out.println("The winner is: Player ");
+                }else
+                {
+                    System.out.println("Check your code, this should not happen :) ");
+                }
+            }else
+            {
+                System.out.println("We are continuing with the next move...");
+            }
+          
         }
-        
-
-
-        //long mobileNo = sc.nextLong();
-        //double cgpa = sc.nextDouble();
- 
-        // Print the values to check if input was correctly obtained.
-        
-
     }
 }
