@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class Paper {
+    public static void main(String args[]) {
+        Scanner scan = new Scanner(System.in);
+        int n=scan.nextInt();
+        System.out.println("Game will finish within "+n+" number of moves.");
+        String move;
+        move = scan.nextLine();
+        
+        for (int i = 0;i<n;i++)
+        {
+            move = scan.nextLine();
+            System.out.println("Your move is: "+move);
+
+        }
+        
+
+
+        //long mobileNo = sc.nextLong();
+        //double cgpa = sc.nextDouble();
+ 
+        // Print the values to check if input was correctly obtained.
+        
+
+    }
+}
