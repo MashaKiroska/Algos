@@ -1,59 +1,81 @@
-import java.util.Scanner;
 import java.util.*;
 // Natasha Kiroska 14.08.2018
+
+class GameRules {
+    Boolean win = false;
+     // Game: moves and rules definition
+    String gameMoves[] = {"paper","rock","scissors"};
+    Hashtable winnerRules = new Hashtable();
+    //:game
+      
+    
+    void winner (String computerMove, String playerMove){
+        // Rule definition 
+        winnerRules.put("paper","rock");
+        winnerRules.put("rock","scissors");
+        winnerRules.put("scissors","paper");
+        //:rules
+        
+        System.out.println("Player's move is: "+playerMove);
+        System.out.println("Computer's move is: "+computerMove+"\n");
+        // Winner calculation
+        if (!Objects.equals(computerMove,playerMove))
+        {
+            if (Objects.equals(winnerRules.get(computerMove),playerMove))
+            {
+                System.out.println("The winner is: The Computer \n");
+                win = true;
+            }else if (Objects.equals(winnerRules.get(playerMove),computerMove))
+            {
+                System.out.println("The winner is: The Player \n");
+                win = true;
+            }else
+            {
+                System.out.println("Check your code, this should not happen :) ");
+            }
+        }else
+        {
+            System.out.println("No winner, we are continuing with the next move... \n");
+            win = false;
+        }//if
+    }
+    
+    public Boolean result(){
+        return win;
+    }
+}
 
 public class Paper {
     public static void main(String args[]) {
         // vars
         Scanner scan = new Scanner(System.in);
-        int n=scan.nextInt();
+        int n = scan.nextInt();
         String playerMove = scan.nextLine();
         String computerMove;
         Random random =new Random();
         Boolean win;
         
-        // Game: moves and rules definition
+        // Game: moves 
         String gameMoves[] = {"paper","rock","scissors"};
-        Hashtable winnerRules = new Hashtable();
-        winnerRules.put("paper","rock");
-        winnerRules.put("rock","scissors");
-        winnerRules.put("scissors","paper");
         //:game
       
+        GameRules PaperGame = new  GameRules();
         // Play the game n-times
         for (int i = 0;i<n;i++)
         {
             win = false;
             System.out.println("--->>> Game number: "+(i+1));
-            
-            //Play the game
+            //Play the game until we have the winner
             while (!win)
             {
-                int m =random.nextInt(gameMoves.length);
-                computerMove = gameMoves[m];
+                // Computer move is random one from the pool
+                computerMove = gameMoves[random.nextInt(gameMoves.length)];
+                // Player's move from the input
                 playerMove = scan.nextLine().trim();
-                
-                System.out.println("Player's move is: "+playerMove);
-                System.out.println("Computer's move is: "+computerMove+"\n");
-                if (!Objects.equals(computerMove,playerMove))
-                {
-                    if (Objects.equals(winnerRules.get(computerMove),playerMove))
-                    {
-                        System.out.println("The winner is: The Computer \n");
-                        win = true;
-                    }else if (Objects.equals(winnerRules.get(playerMove),computerMove))
-                    {
-                        System.out.println("The winner is: The Player \n");
-                        win = true;
-                    }else
-                    {
-                        System.out.println("Check your code, this should not happen :) ");
-                    }
-                }else
-                {
-                    System.out.println("No winner, we are continuing with the next move... \n");
-                }//if
-                
+                // Check do we have a winner
+                PaperGame.winner(computerMove,playerMove);
+                // Retrieve the result
+                win = PaperGame.result();
             }//while
           
         }//for
